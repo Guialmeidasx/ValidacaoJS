@@ -1,47 +1,55 @@
-function ValidarCampos(){
-    let nome = document.getElementById("nome");
-    let email = document.getElementById("email");
+let chave = "Nome 1";
+let chave2 = "Email 1";
+let i = 0;
 
+function ArmazenaDados()
+{
+    localStorage.setItem(chave, document.getElementById("nome").value);
+    localStorage.setItem(chave2, document.getElementById("email").value);
+    LimparCampos();
+}
 
-    if(nome.value == ""){
-        alert("Digite o nome!");
-        nome.focus();
-        return;
+function ConsultaDados()
+{
+   document.getElementById("resultado").innerHTML = localStorage.getItem(chave) + " - " + localStorage.getItem(chave2);
 }
-else{
-    if(nome.value.length > 20){
-        alert("Limite de caracteres 20 caracteres ultrapassado.");
-        nome.value = "";
-        nome.focus();
-        return;
-    }
+
+function AtualizaDados()
+{
+    localStorage.setItem(chave, document.getElementById("nome").value);
+    localStorage.setItem(chave2, document.getElementById("email").value);
+    LimparCampos();
 }
-    if(email.value ==""){
-        alert("Digite o email!");
-        email.focus();
-        return;
-    }
-    else
+
+function LimparCampos()
+{
+    document.getElementById("nome").value = "";
+    document.getElementById("email").value = "";
+}
+
+function InsertData()
+{
+    i = i + 1;
+    localStorage.setItem("Nome " + i , document.getElementById("nome").value);
+    localStorage.setItem("Email " + i, document.getElementById("email").value);
+    LimparCampos();
+}
+
+function ViewAllData()
+{
+    let resultado = "";
+
+    for(let indice = 1; indice <= i; indice++)
     {
-        if(!ValidaEmail(email.value.trim())){
-            alert("Email Incorreto!");
-            email.value = "";
-            email.focus();
-            return;
-        }    
-        else
-        {
-
-            //let parteEmail = email.value.substring(0,5);
-            //alert(parteEmail);
-
-            let antesDoArroba = email.value.substring(0, email.value.indexOf("@"));
-            alert(antesDoArroba);
-        }
+        resultado += localStorage.getItem("Nome " + indice) + " - " + localStorage.getItem("Email " + indice) + "<br>";
     }
+
+    document.getElementById("resultado").innerHTML = resultado;
 }
 
-function ValidaEmail(email){
-    const regex = /\S+@\S+\.\S+/;
-    return regex.test(email);
+function DeleteData()
+{
+    localStorage.removeItem("Nome " + document.getElementById("indice").value);
+    localStorage.removeItem("Email " + document.getElementById("indice").value);
+    document.getElementById("indice").value = "";
 }
