@@ -1,55 +1,66 @@
 let chave = "Nome 1";
-let chave2 = "Email 1";
+let chave2 = "Curso 1";
+let chave3 = "Ano";
 let i = 0;
-
-function ArmazenaDados()
+ 
+function ArmazenarDados()
 {
     localStorage.setItem(chave, document.getElementById("nome").value);
-    localStorage.setItem(chave2, document.getElementById("email").value);
+    localStorage.setItem(chave2, document.getElementById("curso").value);
+    localStorage.setItem(chave3, document.getElementById("ano").value);
     LimparCampos();
 }
-
-function ConsultaDados()
+ 
+function ConsultarDados()
 {
-   document.getElementById("resultado").innerHTML = localStorage.getItem(chave) + " - " + localStorage.getItem(chave2);
+    document.getElementById("resultado").innerHTML = localStorage.getItem(chave) + " - " +
+    localStorage.getItem(chave2);
 }
-
-function AtualizaDados()
-{
-    localStorage.setItem(chave, document.getElementById("nome").value);
-    localStorage.setItem(chave2, document.getElementById("email").value);
-    LimparCampos();
-}
-
+ 
+// Function para limpar dados após a utilização do botão
+ 
 function LimparCampos()
 {
     document.getElementById("nome").value = "";
-    document.getElementById("email").value = "";
+    document.getElementById("curso").value = "";
+    document.getElementById("ano").value = "";
 }
-
-function InsertData()
+ 
+function AtualizarDados()
 {
-    i = i + 1;
-    localStorage.setItem("Nome " + i , document.getElementById("nome").value);
-    localStorage.setItem("Email " + i, document.getElementById("email").value);
+    localStorage.setItem(chave, document.getElementById("nome").value);
+    localStorage.setItem(chave2, document.getElementById("curso").value);
+    localStorage.setItem(chave3, document.getElementById("ano").value);
     LimparCampos();
 }
-
+ 
+function insertData()
+{  
+    i = i + 1;
+    localStorage.setItem("Nome " + i , document.getElementById("nome").value);
+    localStorage.setItem("Curso " + i, document.getElementById("curso").value);
+    localStorage.setItem("ano " + i, document.getElementById("ano").value);
+    LimparCampos();
+}
+ 
 function ViewAllData()
 {
     let resultado = "";
-
     for(let indice = 1; indice <= i; indice++)
     {
-        resultado += localStorage.getItem("Nome " + indice) + " - " + localStorage.getItem("Email " + indice) + "<br>";
+        resultado += localStorage.getItem("Nome " + indice) + " - " +  
+        localStorage.getItem("Curso " + indice ) + " - " + localStorage.getItem("ano " + indice );
+        "<br>";
     }
-
+ 
     document.getElementById("resultado").innerHTML = resultado;
 }
-
+ 
 function DeleteData()
 {
-    localStorage.removeItem("Nome " + document.getElementById("indice").value);
-    localStorage.removeItem("Email " + document.getElementById("indice").value);
-    document.getElementById("indice").value = "";
+    localStorage.removeItem("Nome " + document.getElementById("ano").value);
+    localStorage.removeItem("Curso " + document.getElementById("curso").value);
+    localStorage.removeItem("ano " + document.getElementById("ano").value);
+   
 }
+ 
